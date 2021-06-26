@@ -1,15 +1,19 @@
-import {Provider} from 'react-redux';
-import {store} from "./redux/store";
+import React, {useState} from "react";
+import Header from "./coponents/Header";
+import EditNote from "./coponents/EditNote";
+import ActiveItems from "./coponents/ActiveItems";
 
 function App() {
+    console.log("App")
+
     return (
-        <Provider store={store}>
-            <h1>
-                hello
 
+        <div className="container">
+            <Header/>
+            <ActiveItems/>
 
-            </h1>
-        </Provider>
+        </div>
+
     );
 }
 

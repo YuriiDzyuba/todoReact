@@ -1,31 +1,121 @@
-const A_A = "A_A"
-const B_B = "B_B"
-const C_C = "C_C"
+const ADD_NEW_NOTE = "ADD_NEW_NOTE"
+const SHOW_EDITOR = "SHOW_EDITOR"
+const SHOW_NEW_ITEM_EDITOR = "SHOW_NEW_ITEM_EDITOR"
+const SAVE_CHANGES = "SAVE_CHANGES"
+const CHANGE_CATEGORY = "CHANGE_CATEGORY"
+const CHANGE_NAME = "CHANGE_NAME"
+const CHANGE_CONTENT = "CHANGE_CONTENT"
+const CHANGE_DATE = "CHANGE_DATE"
+const CLEAR_DATA = "CLEAR_DATA"
+const DELETE_NOTE = "DELETE_NOTE"
 
 let initialState = {
-    a: "",
-    b: "",
-    c: ""
+    emptyNote: {
+        id: "emptyNote",
+        name: "",
+        category: "",
+        content: "",
+        date: "",
+        changedDate: ""
+    },
+    "ddsf-dfsd-dfdf-sdfsd": {
+        id: "ddsf-dfsd-dfdf-sdfsd",
+        name: "Shopping list",
+        category: "Random",
+        content: "buy this and that",
+        date: new Date(),
+        changedDate: ""
+    }
 }
+
 
 export let noteItemsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case A_A:
-            return {...state, email: action.text}
-        case B_B:
-            return {...state, password: action.text}
-        case C_C:
-            return {...state, register: action.text}
+        case ADD_NEW_NOTE: {
+            let stateCopy = {...state}
+            stateCopy.emptyNote.id = action.key
+            stateCopy.emptyNote.date = action.date
+            stateCopy[action.key] = {...stateCopy.emptyNote}
+            return stateCopy
+        }
+        case DELETE_NOTE: {
+            let stateCopy = {...state}
+            delete stateCopy[action.key]
+            return stateCopy
+        }
+        case SHOW_EDITOR:
+            return {...state, isEditorActive: true}
+        case SAVE_CHANGES:
+            return {...state, isEditorActive: false}
+        case SHOW_NEW_ITEM_EDITOR:
+            return {...state, isEditorActive: true}
+        case CHANGE_NAME: {
+            let stateCopy = {...state}
+            stateCopy[action.key].name = action.payload
+            return stateCopy
+        }
+        case CHANGE_CONTENT: {
+            let stateCopy = {...state}
+            stateCopy[action.key].content = action.payload
+            return stateCopy
+        }
+        case CHANGE_DATE: {
+            console.log(state[action.key].date,"sdsdsdsdsdsdsd")
+
+            let stateCopy = {...state}
+            stateCopy[action.key].date
+                ? stateCopy[action.key].changedDate = action.payload
+                : stateCopy[action.key].date = action.payload
+            return stateCopy
+        }
+        case CHANGE_CATEGORY:
+            let stateCopy = {...state}
+            stateCopy[action.key].category = action.payload
+            return stateCopy
+        case CLEAR_DATA:
+            return {
+                ...state, emptyNote: {
+                    id: "emptyNote",
+                    name: "",
+                    category: "",
+                    content: "",
+                    date: "",
+                    changedDate: ""
+                }
+            }
         default :
             return state
     }
 }
 
-export const aaaaAC = (text) => ({type: A_A, text: text,})
 
-export const bbbbAC = (text) => ({type: B_B, text: text,})
+export const showNewItemEditor = () => ({type: SHOW_NEW_ITEM_EDITOR})
 
-export const ccccAC = () => ({type: C_C,})
+export const saveChanges = () => ({type: SAVE_CHANGES})
+
+export const changeCategory = (payload, key) => ({type: CHANGE_CATEGORY, payload, key})
+
+export const changeName = (payload, key) => ({type: CHANGE_NAME, payload, key})
+
+export const changeContent = (payload, key) => ({type: CHANGE_CONTENT, payload, key})
+
+export const changeDate = (payload, key) => ({type: CHANGE_DATE, payload, key})
+
+export const clearData = () => ({type: CLEAR_DATA})
+
+export const addNewNoteToState = (date, key) => ({type: ADD_NEW_NOTE, date, key})
+
+export const deleteNote = (key) => ({type: DELETE_NOTE, key})
+
+
+
+export const addNewNote = (id, date) => (dispatch, getState) => {
+    console.log("wdwdwddw")
+    dispatch(addNewNoteToState(date, id))
+    dispatch(clearData())
+}
+
+
 
 
 
