@@ -1,27 +1,31 @@
 import React from 'react';
 import trashIcon from "../img/icons/trashWhite.svg"
 import archiveIcon from "../img/icons/downloadWhite.svg"
-const Header = () => {
+import unArchiveIcon from "../img/icons/uploadWhite.svg"
+import editItem from "../img/icons/editWhite.svg"
+
+const Header = (props) => {
     return (
-        <div className="row header">
+        <div className="row header mt-3">
             <div className="col-2">
-                <h5>Name</h5>
+                <h6>Name</h6>
             </div>
             <div className="col-2">
-                <h5>Created</h5>
+                <h6>Created</h6>
             </div>
             <div className="col-2">
-                <h5>Category</h5>
+                <h6>Category</h6>
             </div>
             <div className="col-2">
-                <h5>Content</h5>
+                <h6>Content</h6>
             </div>
             <div className="col-2">
-                <h5>Dates</h5>
+                <h6>Dates</h6>
             </div>
             <div className="col-2 text-end ">
-                <img src={archiveIcon}/>
-                <img src={trashIcon}/>
+                <img alt="" src={props.isNotesActive ? editItem : null}/>
+                <img alt="" src={props.isNotesActive ? archiveIcon : unArchiveIcon}/>
+                <img alt="" src={trashIcon}/>
             </div>
         </div>
     );

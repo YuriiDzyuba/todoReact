@@ -12,15 +12,16 @@ import {
 } from "../redux/noteItemsReducer";
 
 const EditNote = (props) => {
+
     console.log(props.itemKey,"props,itemKey")
+
     const chosenItem = useSelector(state => state.notes[props.itemKey])
     const settings = useSelector(state => state.settings)
-
     const dispatch = useDispatch()
+
     const saveNote = () => {
         props.setItemEditor()
         if (props.itemKey!=="emptyNote") {
-          //  dispatch(saveChanges())
         } else {
             dispatch(addNewNote(uuid(), new Date()))
         }
@@ -61,9 +62,11 @@ const EditNote = (props) => {
             </div>
             <div className="col-4">
                 <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">{props.itemKey === "emptyNote" ? "date" : "new date"}</span>
+                    <span className="input-group-text" id="basic-addon1">{props.itemKey === "emptyNote" ? "end date" : "new end date"}</span>
                     <DatePicker style={{height: "60px"}}
-                                selected={chosenItem.date ? chosenItem.date : new Date()}
+                                selected={chosenItem.changedDate[chosenItem.changedDate.length-1]
+                                    ? chosenItem.changedDate[chosenItem.changedDate.length-1]
+                                    : new Date()}
                                 onChange={(date) => dispatch(changeDate(date, props.itemKey))}
                     />
                 </div>

@@ -1,19 +1,16 @@
-import React, {useState} from "react";
-import Header from "./coponents/Header";
-import EditNote from "./coponents/EditNote";
-import ActiveItems from "./coponents/ActiveItems";
+import React from "react";
+import NoteItems from "./coponents/NoteItems";
+import AllNotes from "./coponents/AllNotes";
 
 function App() {
-    console.log("App")
 
     return (
-
         <div className="container">
-            <Header/>
-            <ActiveItems/>
-
+            <NoteItems isNotesActive={true} showHeaderWithoutNotes={true}/>
+            <AllNotes/>
+            <h5 className="pt-4 text-center">Archive</h5>
+            <NoteItems  isNotesActive={false} showHeaderWithoutNotes={false}/>
         </div>
-
     );
 }
 

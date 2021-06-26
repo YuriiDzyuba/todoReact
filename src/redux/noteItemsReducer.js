@@ -8,6 +8,7 @@ const CHANGE_CONTENT = "CHANGE_CONTENT"
 const CHANGE_DATE = "CHANGE_DATE"
 const CLEAR_DATA = "CLEAR_DATA"
 const DELETE_NOTE = "DELETE_NOTE"
+const ADD_TO_ARCHIVE = "ADD_TO_ARCHIVE"
 
 let initialState = {
     emptyNote: {
@@ -16,7 +17,8 @@ let initialState = {
         category: "",
         content: "",
         date: "",
-        changedDate: ""
+        changedDate: "",
+        isActive: true
     },
     "ddsf-dfsd-dfdf-sdfsd": {
         id: "ddsf-dfsd-dfdf-sdfsd",
@@ -24,7 +26,8 @@ let initialState = {
         category: "Random",
         content: "buy this and that",
         date: new Date(),
-        changedDate: ""
+        changedDate: "",
+        isActive: true
     }
 }
 
@@ -41,6 +44,11 @@ export let noteItemsReducer = (state = initialState, action) => {
         case DELETE_NOTE: {
             let stateCopy = {...state}
             delete stateCopy[action.key]
+            return stateCopy
+        }
+        case ADD_TO_ARCHIVE: {
+            let stateCopy = {...state}
+            stateCopy[action.key].isActive=!stateCopy[action.key].isActive
             return stateCopy
         }
         case SHOW_EDITOR:
@@ -60,12 +68,10 @@ export let noteItemsReducer = (state = initialState, action) => {
             return stateCopy
         }
         case CHANGE_DATE: {
-            console.log(state[action.key].date,"sdsdsdsdsdsdsd")
-
             let stateCopy = {...state}
-            stateCopy[action.key].date
-                ? stateCopy[action.key].changedDate = action.payload
-                : stateCopy[action.key].date = action.payload
+            stateCopy[action.key].changedDate
+                ? stateCopy[action.key].changedDate[1]=action.payload
+                : stateCopy[action.key].changedDate = [action.payload]
             return stateCopy
         }
         case CHANGE_CATEGORY:
@@ -80,7 +86,8 @@ export let noteItemsReducer = (state = initialState, action) => {
                     category: "",
                     content: "",
                     date: "",
-                    changedDate: ""
+                    changedDate: "",
+                    isActive: true
                 }
             }
         default :
@@ -106,6 +113,8 @@ export const clearData = () => ({type: CLEAR_DATA})
 export const addNewNoteToState = (date, key) => ({type: ADD_NEW_NOTE, date, key})
 
 export const deleteNote = (key) => ({type: DELETE_NOTE, key})
+
+export const toArchiveHandler = (key) => ({type: ADD_TO_ARCHIVE, key})
 
 
 
