@@ -1,6 +1,6 @@
 import React from 'react';
 import DatePicker from "react-datepicker";
-import "./react-datepicker.scss";
+import "../styles/react-datepicker.scss";
 import {useDispatch, useSelector} from "react-redux";
 import uuid from 'react-uuid'
 import {
@@ -12,8 +12,6 @@ import {
 } from "../redux/noteItemsReducer";
 
 const EditNote = (props) => {
-
-    console.log(props.itemKey,"props,itemKey")
 
     const chosenItem = useSelector(state => state.notes[props.itemKey])
     const settings = useSelector(state => state.settings)
@@ -27,7 +25,6 @@ const EditNote = (props) => {
         }
     }
 
-    console.log(chosenItem, "notes")
     return (
         <div className="row editNote ">
             <div className="col-12 text-center">

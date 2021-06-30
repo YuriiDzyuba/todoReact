@@ -6,7 +6,7 @@ import edit from "../img/icons/edit.svg";
 import EditNote from "./EditNote";
 import {useDispatch} from "react-redux";
 import {deleteNote, toArchiveHandler} from "../redux/noteItemsReducer";
-import {getCategoryImage} from "../getCategoryImage";
+import {getCategoryImage} from "../functions/getCategoryImage";
 
 
 const ToDoItem = ({content}) => {

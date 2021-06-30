@@ -12,7 +12,6 @@ const NoteItems = (props) => {
         ? <ToDoItem key={i} content={e}/>
         : null)
 
-    console.log(noteItems,"noteItems")
     return (
         <>
             <Header isNotesActive={props.isNotesActive}/>
